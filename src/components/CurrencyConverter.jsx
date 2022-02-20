@@ -1,9 +1,11 @@
 import React from "react"; 
+import ExchangeRate from "./ExchangeRate";
 
 function CurrencyConverter(){
     return (
        <div className="currency-converter">
-           NewsFeed
+           currency
+           <ExchangeRate />
       </div>
 
     )

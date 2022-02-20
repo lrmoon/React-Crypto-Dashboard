@@ -1,6 +1,6 @@
 import React from "react"; 
 
-const NewsFeed = () => {
+function NewsFeed () {
     return(
         <div className="news-feed">
             NewsFeed
