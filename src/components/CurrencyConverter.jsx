@@ -7,7 +7,7 @@ function CurrencyConverter(){
     const [chosenPrimaryCurrency, setChosenPrimaryCurrency] = useState('BTC')
     const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('BTC')
     const [amount, setAmount] = useState(1)
-    console.log(amount);
+    console.log(setAmount);
 
     return (
        <div className="currency-converter">
