@@ -9,7 +9,7 @@ function CurrencyConverter(){
     const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('BTC')
     const [amount, setAmount] = useState(1)
     const [exchangeRate, setExchangeRate] = useState(0)
-    console.log(setAmount);
+    //console.log(setAmount);
 
     const convert = () =>{
 
@@ -21,10 +21,10 @@ function CurrencyConverter(){
             'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
             'X-RapidAPI-Key': 'cdddad4fecmshbe8b38a94a89518p131a83jsn0b2a184e0b97'
         }
-        };
+    };
 
         axios.request(options).then((response) => {
-            console.log(response.data['Realtime Currency Exchange Rate']);
+            console.log('hello')
             console.log(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
             setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
         }).catch(function (error) {
@@ -32,7 +32,7 @@ function CurrencyConverter(){
         });
     }
 
-    console.log(exchangeRate)
+    //console.log(exchangeRate)
 
     return (
        <div className="currency-converter">
