@@ -8,8 +8,15 @@ function CurrencyConverter(){
     const [chosenPrimaryCurrency, setChosenPrimaryCurrency] = useState('BTC')
     const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('BTC')
     const [amount, setAmount] = useState(1)
-    const [exchangeRate, setExchangeRate] = useState(0)
-    //console.log(setAmount);
+    
+    const [exchangedData, setExchangedData] = useState({
+        primaryCurrency: 'BTC',
+        secondaryCurrency:'BTC',
+        exchangeRate: 0
+    })
+    
+    const [result, setResult] = useState(0)
+    console.log(exchangedData);
 
     const convert = () =>{
 
@@ -19,20 +26,28 @@ function CurrencyConverter(){
         params: {from_currency: chosenPrimaryCurrency, function: 'CURRENCY_EXCHANGE_RATE', to_currency: chosenSecondaryCurrency},
         headers: {
             'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
-            'X-RapidAPI-Key': 'cdddad4fecmshbe8b38a94a89518p131a83jsn0b2a184e0b97'
+            'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY
         }
     };
 
         axios.request(options).then((response) => {
-            console.log('hello')
-            console.log(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
-            setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
+            console.log(response.data['Realtime Currency Exchange Rate']);
+            //setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
+            setResult(response.data * amount)
+            // setPrimaryCurrencyExchanged(chosenPrimaryCurrency)
+            // setSecondaryCurrencyExchanged(chosenSecondaryCurrency)
+            setExchangedData({
+                primaryCurrency: chosenPrimaryCurrency,
+                secondaryCurrency: chosenSecondaryCurrency,
+                exchangeRate: response.data
+
+            })
         }).catch(function (error) {
             console.error(error);
         });
     }
 
-    //console.log(exchangeRate)
+    
 
     return (
        <div className="currency-converter">
@@ -54,7 +69,7 @@ function CurrencyConverter(){
                        </td>
                        <td>
                            <select
-                               value={""}
+                               value={chosenPrimaryCurrency}
                                name="currency-option-1"
                                className="currency-options"
                                onChange={(e) => setChosenPrimaryCurrency(e.target.value)}
@@ -68,9 +83,9 @@ function CurrencyConverter(){
                        <td>Secondary Currency</td>
                        <td>
                            <input
-                                type="number"
                                 name="currency-amount-2"
-                                value={""}
+                                value={result}
+                                disabled={true}
                             />
 
                        </td>
@@ -91,7 +106,9 @@ function CurrencyConverter(){
 
            <button id="convert-button" onClick={convert}>Convert</button>
 
-           <ExchangeRate />
+           <ExchangeRate
+                exchangedData={exchangedData}
+           />
       </div>
       </div>
 
