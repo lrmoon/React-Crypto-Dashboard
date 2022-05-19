@@ -31,15 +31,15 @@ function CurrencyConverter(){
     };
 
         axios.request(options).then((response) => {
-            console.log(response.data['Realtime Currency Exchange Rate']);
+            console.log(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
             //setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
-            setResult(response.data * amount)
+            setResult(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'] * amount)
             // setPrimaryCurrencyExchanged(chosenPrimaryCurrency)
             // setSecondaryCurrencyExchanged(chosenSecondaryCurrency)
             setExchangedData({
                 primaryCurrency: chosenPrimaryCurrency,
                 secondaryCurrency: chosenSecondaryCurrency,
-                exchangeRate: response.data
+                exchangeRate: response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']
 
             })
         }).catch(function (error) {
