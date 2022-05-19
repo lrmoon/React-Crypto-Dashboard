@@ -12,7 +12,7 @@ Simply choose your first currency and the secondary currency you would like to c
 
 ## Deployment
 
-You can view this app ![here]https://cryptodashbor.herokuapp.com/
+You can view this app [here](https://cryptodashbor.herokuapp.com/)
 
 ## Next Steps
 
